@@ -1,35 +1,32 @@
 package find.model;
 
+import java.util.List;
 
 public class Contact {
 
     private String name;
 
-    public Contact(String name) {
+    private List<String> numbers;
+
+    public Contact(String name, List<String> numbers) {
         this.name = name;
+        this.numbers = numbers;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Contact contact = (Contact) o;
-
-        return name != null ? name.equals(contact.name) : contact.name == null;
+    public List<String> getNumbers() {
+        return this.numbers;
     }
 
-    @Override
-    public int hashCode() {
-        return name != null ? name.hashCode() : 0;
+    public void setNumbers(List<String> numbers) {
+        this.numbers = numbers;
     }
 
     @Override

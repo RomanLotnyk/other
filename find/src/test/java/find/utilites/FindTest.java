@@ -1,7 +1,6 @@
 package find.utilites;
 
 import find.model.Contact;
-import find.model.Number;
 import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -15,48 +14,51 @@ public class FindTest {
 
     @Test
     public void whenInitNumberContactAndAssertThatListToFindContact() {
-        Number ivanov_one = new Number("+8 800 2000 500");
-        Number ivanov_two = new Number("+8 800 200 600");
-        List<Number> ivanov_list = new ArrayList<>();
-        ivanov_list.add(ivanov_one);
-        ivanov_list.add(ivanov_two);
-        Number petrov_one = new Number("+8 800 2000 700");
-        List<Number> petrov_list = new ArrayList<>();
-        petrov_list.add(petrov_one);
-        List<Number> sidorov_list = new ArrayList<>();
-        Number sidorov_one = new Number("+8 800 2000 800");
-        Number sidorov_two = new Number("+8 800 2000 900");
-        Number sidorov_three = new Number("+8 800 2000 000");
-        sidorov_list.add(sidorov_one);
-        sidorov_list.add(sidorov_two);
-        sidorov_list.add(sidorov_three);
-        HashMap<Contact, List<Number>> data = new HashMap<>();
-        data.put(new Contact("Иванов И.И."), ivanov_list);
-        data.put(new Contact("Петоров П.П."), petrov_list);
-        data.put(new Contact("Сидоров С.С."), sidorov_list);
+        List<String> ivanNumbers = new ArrayList<>();
+        ivanNumbers.add("+8 800 2000 500");
+        ivanNumbers.add("+8 800 200 600");
+
+        List<String> sidNumbers = new ArrayList<>();
+        sidNumbers.add("+8 800 2000 800");
+        sidNumbers.add("+8 800 2000 900");
+        sidNumbers.add("+8 800 2000 000");
+
+        List<String> petNumbers = new ArrayList<>();
+        petNumbers.add("+8 800 2000 700");
+
+
+        Contact ivan = new Contact("Иванов И.И.", ivanNumbers);
+        Contact sid = new Contact("Сидоров С.С.", sidNumbers);
+        Contact pet = new Contact("Петров П.П.", petNumbers);
+        HashMap<String, Contact> data = new HashMap<>();
+        data.put("Иванов И.И.", ivan);
+        data.put("Сидоров С.С.", sid);
+        data.put("Петров П.П.", pet);
+
         Find find = new Find(data);
-        List<Number> fRes = find.searchNumber(new Contact("Иванов И.И."));
-        List<Number> desirble = new ArrayList<>();
-        desirble.add(new Number("+8 800 2000 500"));
-        desirble.add(new Number("+8 800 200 600"));
-        assertThat(fRes.get(0), is(desirble.get(0)));
-        assertThat(fRes.get(1), is(desirble.get(1)));
+        List<String> res = find.find("Иванов И.И.");
+
+        assertThat(res.get(0), is("+8 800 2000 500"));
+        assertThat(res.get(1), is("+8 800 200 600"));
     }
 
     @Test
     public void whenNotFoundContactAssertThatEqualText() {
-        Number ivanov_one = new Number("+8 800 2000 500");
-        Number ivanov_two = new Number("+8 800 200 600");
-        List<Number> ivanov_list = new ArrayList<>();
-        ivanov_list.add(ivanov_one);
-        ivanov_list.add(ivanov_two);
-        HashMap<Contact, List<Number>> data = new HashMap<>();
-        data.put(new Contact("Иванов И.И."), ivanov_list);
-        Find find = new Find(data);
+        List<String> ivanNumbers = new ArrayList<>();
+        ivanNumbers.add("+8 800 2000 500");
+        ivanNumbers.add("+8 800 200 600");
+
+        Contact ivan = new Contact("Иванов И.И.", ivanNumbers);
+
+        HashMap<String, Contact> data = new HashMap<>();
+        data.put("Иванов И.И.", ivan);
+
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setErr(new PrintStream(out));
-        find.searchNumber(new Contact("Иванов А.А."));
-        assertThat(out.toString(), is("Contact Not Found!\r\n"));
 
+        Find find = new Find(data);
+        find.find("Петров П.П.");
+
+        assertThat(out.toString(), is("Contact Not Found!\r\n"));
     }
 }
