@@ -13,6 +13,7 @@
 
 <modules>
 	<module>find</module>
+	<module>ip</module>
 </modules>
 
 <dependencies>
