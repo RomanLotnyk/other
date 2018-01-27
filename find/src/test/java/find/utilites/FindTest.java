@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
@@ -36,10 +37,9 @@ public class FindTest {
         data.put("Петров П.П.", pet);
 
         Find find = new Find(data);
-        List<String> res = find.find("Иванов И.И.");
+        List<String> res = find.search("Иванов И.И.");
 
-        assertThat(res.get(0), is("+8 800 2000 500"));
-        assertThat(res.get(1), is("+8 800 200 600"));
+        assertThat(res, is(Arrays.asList("+8 800 2000 500", "+8 800 200 600")));
     }
 
     @Test
@@ -57,7 +57,7 @@ public class FindTest {
         System.setErr(new PrintStream(out));
 
         Find find = new Find(data);
-        find.find("Петров П.П.");
+        find.search("Петров П.П.");
 
         assertThat(out.toString(), is("Contact Not Found!\r\n"));
     }
