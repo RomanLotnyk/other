@@ -72,13 +72,4 @@ public class IPDiapason {
         this.ipList.remove(0);
     }
 
-    public static void main(String[] args) {
-        IP first = new IP("192.168.0.1");
-        IP second = new IP("192.168.1.5");
-        IPDiapason ipDiapason = new IPDiapason(first, second);
-        ipDiapason.diapason();
-        for (IP result: ipDiapason.getAll()) {
-            System.out.println(result);
-        }
-    }
 }
