@@ -28,7 +28,7 @@ public class IPDiapason {
     public IPDiapason(IP first, IP second) {
         this.first = first;
         this.second = second;
-        this.second.setFour(this.second.getFour() - 1);
+        this.second.four--;
         this.ipList.add(this.second);
     }
 
@@ -49,26 +49,36 @@ public class IPDiapason {
         IP ip = null;
 
          do {
-             if (this.first.getFour() < 255) {
-                this.first.setFour(this.first.getFour() + 1);
-            } else if (this.first.getThree() < 255) {
-                this.first.setFour(0);
-                this.first.setThree(this.first.getThree() + 1);
-            } else if (this.first.getTwo() < 255) {
-                this.first.setThree(0);
-                this.first.setTwo(this.first.getTwo() + 1);
-            } else if (this.first.getOne() < 255) {
-                this.first.setTwo(0);
-                this.first.setOne(this.first.getOne() + 1);
+             if (this.first.four < 255) {
+                this.first.four++;
+            } else if (this.first.three < 255) {
+                this.first.four = 0;
+                this.first.three++;
+            } else if (this.first.two < 255) {
+                this.first.three = 0;
+                this.first.two++;
+            } else if (this.first.one < 255) {
+                this.first.two = 0;
+                this.first.one++;
             }
                             ip = new IP(String.format("%s.%s.%s.%s",
-                            this.first.getOne(),
-                            this.first.getTwo(),
-                            this.first.getThree(),
-                            this.first.getFour()));
+                            this.first.one,
+                            this.first.two,
+                            this.first.three,
+                            this.first.four));
                             this.ipList.add(ip);
 
         } while (!ip.equals(this.ipList.get(0)));
         this.ipList.remove(0);
+    }
+
+    public static void main(String[] args) {
+        IP first = new IP("192.168.0.1");
+        IP second = new IP("192.168.1.5");
+        IPDiapason ipDiapason = new IPDiapason(first, second);
+        ipDiapason.diapason();
+        for (IP result: ipDiapason.getAll()) {
+            System.out.println(result);
+        }
     }
 }

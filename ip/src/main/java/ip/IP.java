@@ -6,21 +6,20 @@ public class IP {
     /**
      * one.
      */
-    private int one;
+    public int one;
     /**
      * two.
      */
-    private int two;
+    public int two;
     /**
      * three.
      */
-    private int three;
+    public int three;
 
     /**
      * four.
      */
-    private int four;
-
+    public int four;
 
     /**
      * Constructor.
@@ -35,70 +34,6 @@ public class IP {
     }
 
     /**
-     * getter.
-     * @return return
-     */
-    public int getOne() {
-        return this.one;
-    }
-
-    /**
-     * setter.
-     * @param one one
-     */
-    public void setOne(int one) {
-        this.one = one;
-    }
-
-    /**
-     * getter.
-     * @return return
-     */
-    public int getTwo() {
-        return this.two;
-    }
-
-    /**
-     * setter.
-     * @param two two
-     */
-    public void setTwo(int two) {
-        this.two = two;
-    }
-
-    /**
-     * getter.
-     * @return return
-     */
-    public int getThree() {
-        return this.three;
-    }
-
-    /**
-     * setter.
-     * @param three three
-     */
-    public void setThree(int three) {
-        this.three = three;
-    }
-
-    /**
-     * getter.
-     * @return return
-     */
-    public int getFour() {
-        return this.four;
-    }
-
-    /**
-     * setter.
-     * @param four four
-     */
-    public void setFour(int four) {
-        this.four = four;
-    }
-
-    /**
      * equals.
      * @param o o
      * @return return
@@ -109,7 +44,6 @@ public class IP {
         if (o == null || getClass() != o.getClass()) return false;
 
         IP ip = (IP) o;
-
         if (one != ip.one) return false;
         if (two != ip.two) return false;
         if (three != ip.three) return false;
